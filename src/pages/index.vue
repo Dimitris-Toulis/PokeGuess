@@ -4,7 +4,7 @@
 	</div>
 	<div class="flex flex-col flex-1 place-items-center place-content-center">
 		<div class="center">
-			<Button class="p-button-2xl"><router-link to="/game">Start</router-link></Button
+			<Button class="p-button-2xl"><router-link to="/game">Start Game</router-link></Button
 			><br />
 			<Button class="p-button-xl mt-10" v-if="!pokedexEnabled" @click="enablePokedex"
 				>Enable PokeGuess Pokedex</Button
