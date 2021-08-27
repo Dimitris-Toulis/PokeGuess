@@ -1,0 +1,17 @@
+.p-button-2xl {
+	font-size: calc(1.25rem * 4);
+	padding: calc(0.625rem * 4) calc(0.9375rem * 4);
+	border-radius: 15px;
+}
+.p-button-xl {
+	font-size: calc(1.25rem * 1.5);
+	padding: calc(0.625rem * 1.5) calc(0.9375rem * 1.5);
+
+	border-radius: 10px;
+}
+.p-button-md {
+	font-size: calc(1.25rem * 1.25);
+	padding: calc(0.625rem * 1.25) calc(0.9375rem * 1.25);
+
+	border-radius: 10px;
+}
