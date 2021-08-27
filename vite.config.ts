@@ -22,6 +22,31 @@ export default defineConfig({
 			injectManifest: {
 				dontCacheBustURLsMatching: /assets\/.*/,
 			},
+			manifest: {
+				background_color: "#20262e",
+				description: "Guess the Pokemon!",
+				name: "PokeGuess",
+				short_name: "PokeGuess",
+				theme_color: "#8dd0ff",
+				icons: [
+					{
+						src: "/android-chrome-192x192.png",
+						sizes: "192x192",
+						type: "image/png",
+					},
+					{
+						src: "/android-chrome-512x512.png",
+						sizes: "512x512",
+						type: "image/png",
+					},
+					{
+						src: "/maskable_icon_x512.png",
+						sizes: "512x512",
+						type: "image/png",
+						purpose: "any maskable",
+					},
+				],
+			},
 		}),
 	],
 	server: {
