@@ -6,21 +6,15 @@
 			<p class="text-2xl">First Correct Guess: {{ currentPokemon.ago }} ago</p>
 		</div>
 	</Sidebar>
-	<div class="text-center pt-5">
-		<h1 class="text-7xl col-span-2">Your PokeGuess Pokedex</h1>
+	<div class="text-center pt-5" :class="{ grid: !persisted }">
+		<h1 class="text-7xl inline-block">Your PokeGuess Pokedex</h1>
+		<div class="mt-5 md:mt-0" v-if="!persisted">
+			<Button class="p-button-md" @click="enablePersistentStorage"
+				>Enable Persistent Storage</Button
+			>
+		</div>
 	</div>
-	<p
-		class="
-			m-2
-			p-5
-			top-0
-			left-0
-			text-4xl
-			fixed
-			dimmed-background
-			md:top-auto md:left-auto md:right-0 md:bottom-0
-		"
-	>
+	<p class="m-2 p-5 top-0 right-0 text-4xl fixed dimmed-background sm:top-auto sm:bottom-0">
 		{{ pokedex.length }}/{{ pokemonAmount }}
 	</p>
 	<div class="m-10 pokedex" v-if="pokedex.length > 0">
@@ -49,6 +43,7 @@ import { getPokemon, getPokemonCount, Pokemon } from "../PokeApi";
 import Sidebar from "primevue/sidebar";
 import { Ref, ref } from "vue";
 import { formatDistanceToNow } from "date-fns";
+let persisted = ref(navigator.storage?.persisted ? await navigator.storage.persisted() : false);
 
 interface PokedexEntry extends Pokemon {
 	ago: string;
@@ -67,6 +62,13 @@ function showDetails(pokemon: PokedexEntry) {
 	currentPokemon.value = pokemon;
 	pokemonDetailsVisible.value = true;
 }
+async function enablePersistentStorage() {
+	if (await navigator.storage.persist()) {
+		persisted.value = true;
+	} else {
+		alert("Your browser did not allow access persistent storage");
+	}
+}
 console.log(pokedex);
 </script>
 
@@ -83,5 +85,10 @@ console.log(pokedex);
 }
 .dimmed-background {
 	background-color: var(--surface-d);
+}
+@screen md {
+	.grid {
+		grid-template-columns: 5fr 1fr;
+	}
 }
 </style>

@@ -1,6 +1,6 @@
 .p-button-2xl {
-	font-size: calc(1.25rem * 4);
-	padding: calc(0.625rem * 4) calc(0.9375rem * 4);
+	font-size: clamp(3rem, -0.875rem + 8.333vw, 5rem);
+	padding: clamp(1rem, calc(0.625vw * 4), 2.5rem) clamp(1rem, calc(0.9375vw * 4), 2.5rem);
 	border-radius: 15px;
 }
 .p-button-xl {
