@@ -2,7 +2,7 @@
 	<transition name="slide">
 		<div
 			v-if="visible"
-			class="m-7 p-5 top-0 right-0 fixed"
+			class="m-7 p-5 top-0 right-0 z-10 fixed"
 			:class="{
 				'bg-green-600': props.severity == 'correct',
 				'bg-red-600': props.severity == 'wrong',
