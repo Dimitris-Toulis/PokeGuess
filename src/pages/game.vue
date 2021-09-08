@@ -105,10 +105,3 @@ async function submitted(
 	pick();
 }
 </script>
-<style>
-.p-sidebar-content {
-	height: 100%;
-	display: flex;
-	flex: 1;
-}
-</style>

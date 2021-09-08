@@ -90,12 +90,6 @@ img {
 p {
 	font-size: clamp(1.25rem, -0.875rem + 8.333vw, 2rem);
 }
-.p-inputtext {
-	width: 100%;
-}
-.p-card-body {
-	width: min-content;
-}
 .hidden {
 	visibility: hidden;
 }
