@@ -14,8 +14,11 @@
 </template>
 
 <script lang="ts" setup>
-import { getPokemonCount } from "../PokeApi";
-await getPokemonCount();
+import { onMounted } from "vue";
+
+onMounted(async () => {
+	(await import("../PokeApi")).getPokemonCount();
+});
 </script>
 
 <style scoped>

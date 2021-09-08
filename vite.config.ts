@@ -68,6 +68,11 @@ export default defineConfig({
 				},
 			},
 		},
+		terserOptions: {
+			compress: {
+				passes: 3,
+			},
+		},
 	},
 	define: {
 		__VUE_OPTIONS_API__: false,
