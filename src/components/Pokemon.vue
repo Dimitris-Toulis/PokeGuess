@@ -23,9 +23,10 @@
 				text-light-600
 				focus:(outline-none
 				ring ring-gray-300 ring-2)
-				"
+			"
 			v-model="name"
 			@keyup="InputKeyPress"
+			spellcheck="false"
 		/>
 
 		<div class="grid gap-3 md:grid-cols-2">
