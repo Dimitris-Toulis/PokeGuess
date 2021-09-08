@@ -1,6 +1,7 @@
 <template>
 	<div
 		ref="sidebar"
+		v-if="currentPokemon != null"
 		v-show="pokemonDetailsVisible"
 		class="bg-gray-800 p-10 pr-12 top-0 right-0 bottom-0 fixed sidebar"
 	>
