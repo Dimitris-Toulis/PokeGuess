@@ -60,7 +60,6 @@ body,
 }
 html {
 	min-height: calc(100 * var(--vh));
-	background-color: var(--surface-b);
 }
 #app {
 	display: flex;
@@ -72,10 +71,5 @@ h1,
 label,
 input {
 	@apply text-light-500;
-}
-</style>
-<style scoped>
-.SWupdate {
-	background-color: var(--surface-d);
 }
 </style>
