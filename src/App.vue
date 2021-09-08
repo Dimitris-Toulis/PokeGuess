@@ -8,11 +8,23 @@
 		</template>
 	</suspense>
 	<div
-		class="h-35 m-5 text-center p-3 right-0 bottom-0 shadow-2xl text-2xl w-75 SWupdate fixed"
+		class="
+			bg-blue-gray-700
+			h-35
+			m-5
+			text-center
+			p-3
+			right-0
+			bottom-0
+			shadow-2xl
+			text-2xl
+			w-75
+			fixed
+		"
 		v-if="showSWpromt"
 	>
 		<p>Reload to Update</p>
-		<div class="flex flex-row mt-2 justify-around">
+		<div class="flex flex-row mt-4 justify-around">
 			<Button class="button-md" @click="updateSW()">Reload</Button
 			><Button class="button-md" @click="hideSWpromt()">Dismiss</Button>
 		</div>
@@ -24,7 +36,7 @@ import { computed, onMounted, ref } from "vue";
 import { registerSW } from "virtual:pwa-register";
 import { useRouter } from "vue-router";
 const router = useRouter();
-let SWRefresh = ref(false);
+let SWRefresh = ref(true);
 let showSWpromt = computed(() =>
 	SWRefresh.value ? router.currentRoute.value.name == "index" : false
 );
