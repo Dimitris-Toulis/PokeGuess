@@ -30,7 +30,7 @@ async function getPokemon(id: number): Promise<Pokemon> {
 		PokemonSpeciesResult.genera.find(val => val.language.name == "en")?.genus ?? "Unavailable";
 	let pokemon = {
 		id: PokemonSpeciesResult.id,
-		name: UpperCaseFirstLetter(PokemonSpeciesResult.name),
+		name: normalizeName(PokemonSpeciesResult.name),
 		image: PokemonResult.sprites.other["official-artwork"].front_default,
 		genera,
 	};
@@ -80,10 +80,13 @@ async function getPokemonCount(): Promise<number> {
 	return result.count;
 }
 
-function UpperCaseFirstLetter(str: string) {
-	return str.charAt(0).toUpperCase() + str.slice(1);
+function normalizeName(str: string) {
+	var splitStr = str.trim().normalize().toLowerCase().split(/-| /);
+	splitStr.forEach((part, i) => {
+		splitStr[i] = part.charAt(0).toUpperCase() + part.substring(1).toLowerCase();
+	});
+	return splitStr.join(" ");
 }
-
 interface Pokemon {
 	id: number;
 	name: string;
