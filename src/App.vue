@@ -36,7 +36,7 @@ import { computed, onMounted, ref } from "vue";
 import { registerSW } from "virtual:pwa-register";
 import { useRouter } from "vue-router";
 const router = useRouter();
-let SWRefresh = ref(true);
+let SWRefresh = ref(false);
 let showSWpromt = computed(() =>
 	SWRefresh.value ? router.currentRoute.value.name == "index" : false
 );
