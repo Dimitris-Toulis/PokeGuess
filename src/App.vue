@@ -1,6 +1,4 @@
 <template>
-	<Toast />
-
 	<suspense>
 		<template #default>
 			<router-view></router-view>
@@ -15,8 +13,8 @@
 	>
 		<p>Reload to Update</p>
 		<div class="flex flex-row mt-2 justify-around">
-			<Button class="p-button-md" @click="updateSW()">Reload</Button
-			><Button class="p-button-md" @click="hideSWpromt()">Dismiss</Button>
+			<Button class="button-md" @click="updateSW()">Reload</Button
+			><Button class="button-md" @click="hideSWpromt()">Dismiss</Button>
 		</div>
 	</div>
 </template>
@@ -67,11 +65,13 @@ html {
 #app {
 	display: flex;
 	flex-direction: column;
+	@apply bg-blue-gray-800;
 }
 p,
 h1,
-label {
-	color: var(--text-color);
+label,
+input {
+	@apply text-light-500;
 }
 </style>
 <style scoped>

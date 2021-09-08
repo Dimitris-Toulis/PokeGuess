@@ -5,8 +5,6 @@ import WindiCSS from "vite-plugin-windicss";
 import { minifyHtml } from "vite-plugin-html";
 import { VitePWA } from "vite-plugin-pwa";
 
-import PurgeCSS from "@fullhuman/postcss-purgecss";
-import { Plugin } from "postcss";
 import Autoprefixer from "autoprefixer";
 
 export default defineConfig({
@@ -57,21 +55,7 @@ export default defineConfig({
 	},
 	css: {
 		postcss: {
-			plugins: [
-				PurgeCSS({
-					content: [
-						"./src/**/*.vue",
-						"./node_modules/primevue/{sidebar,button,toast,inputtext,card}/*.{vue,js}",
-					],
-					extractors: [
-						{
-							extractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
-							extensions: ["vue", "js"],
-						},
-					],
-				}) as unknown as Plugin,
-				Autoprefixer(),
-			],
+			plugins: [Autoprefixer()],
 		},
 	},
 	build: {
@@ -84,5 +68,8 @@ export default defineConfig({
 				},
 			},
 		},
+	},
+	define: {
+		__VUE_OPTIONS_API__: false,
 	},
 });

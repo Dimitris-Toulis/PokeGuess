@@ -1,13 +1,16 @@
 <template>
-	<Sidebar v-model:visible="gameOver" position="full" :show-close-icon="false">
+	<Toast :severity="toast.severity" :visible="toast.visible"
+		><p class="text-xl">{{ toast.message }}</p></Toast
+	>
+	<div v-if="gameOver" class="flex top-0 right-0 bottom-0 left-0 fixed">
 		<div class="flex flex-col flex-1 place-items-center place-content-evenly">
 			<main class="flex flex-col place-content-evenly">
 				<p class="text-5xl">Correct Rate: {{ rate }}%</p>
 				<p class="mt-4 text-5xl">Points: {{ points }}</p>
 			</main>
-			<Button class="p-button-xl"><router-link to="/" replace>Home</router-link></Button>
+			<Button class="button-xl"><router-link to="/" replace>Home</router-link></Button>
 		</div>
-	</Sidebar>
+	</div>
 
 	<teleport to="head">
 		<link v-if="nextImage" rel="preload" as="image" :href="nextImage" />
@@ -35,13 +38,11 @@
 </template>
 
 <script lang="ts" setup>
-import Sidebar from "primevue/sidebar";
 import Pokemon from "../components/Pokemon.vue";
+import Toast from "../components/Toast.vue";
 import { getPokemonCount, getPokemon } from "../PokeApi";
-import { Ref, ref } from "vue";
-import { useToast } from "primevue/usetoast";
+import { reactive, Ref, ref } from "vue";
 import { createStore, update } from "idb-keyval";
-const toast = useToast();
 let pokemon: Ref<number | null> = ref(null);
 let wrong = ref(0);
 let total = ref(0);
@@ -52,6 +53,11 @@ const PokemonCount = await getPokemonCount();
 const PokedexStore = createStore("pokedex", "pokedex");
 let next = Math.floor(Math.random() * PokemonCount + 1);
 let nextImage = ref("");
+let toast = reactive({
+	visible: false,
+	message: "",
+	severity: "",
+});
 function pick() {
 	pokemon.value = next;
 	next = Math.floor(Math.random() * PokemonCount + 1);
@@ -67,12 +73,11 @@ async function submitted(
 ) {
 	total.value++;
 	if (difference <= Math.min(3, Math.ceil(correct.name.length / 3))) {
-		toast.add({
-			severity: "success",
-			summary: difference == 0 ? "Correct!" : "Almost Correct!",
-			detail: difference != 0 ? `Correct name is ${correct.name}` : undefined,
-			life: 3000,
-		});
+		toast.message =
+			difference == 0 ? "Correct!" : `Almost Correct!\nThe correct name is ${correct.name}`;
+		toast.severity = "correct";
+		toast.visible = true;
+		setTimeout(() => (toast.visible = false), 3000);
 		points.value += (10 - hintsAmount) * 100;
 		update(
 			correct.id,
@@ -86,12 +91,10 @@ async function submitted(
 			PokedexStore
 		);
 	} else {
-		toast.add({
-			severity: "error",
-			summary: "Wrong!",
-			detail: `Correct name is ${correct.name}`,
-			life: 3000,
-		});
+		toast.message = `Wrong!\nThe correct name is ${correct.name}`;
+		toast.severity = "wrong";
+		toast.visible = true;
+		setTimeout(() => (toast.visible = false), 3000);
 		wrong.value++;
 		if (wrong.value >= 10) {
 			rate.value =

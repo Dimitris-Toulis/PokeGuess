@@ -1,31 +1,43 @@
 <template>
-	<Card>
-		<template #title>
-			<div class="flex place-content-center">
-				<img
-					alt="Pokemon shadow"
-					:src="pokemon.image"
-					@dragstart.prevent
-					:class="{ 'shadow-only': !hints[1] }"
-				/></div
-		></template>
-		<template #content>
-			<p :class="{ hidden: !hints[0] }">Description: {{ pokemon.genera }}</p>
-			<p :class="{ hidden: !hints[2] }">First Letter: {{ pokemon.name.slice(0, 1) }}</p>
-			<InputText type="text" v-model="name" @keyup="InputKeyPress" />
-		</template>
-		<template #footer>
-			<div class="grid gap-3 md:grid-cols-2">
-				<Button icon="pi pi-check" label="Submit" @click.once="submit" />
-				<Button label="Hint" class="p-button-help" @click="hint" />
-			</div>
-		</template>
-	</Card>
+	<main class="bg-blue-gray-700 shadow-lg p-5 shadow-gray-400 shadow-gray-600 rrounded-md">
+		<div class="flex mb-3 place-content-center">
+			<img
+				alt="Pokemon shadow"
+				:src="pokemon.image"
+				@dragstart.prevent
+				:class="{ 'shadow-only': !hints[1] }"
+			/>
+		</div>
+		<p :class="{ hidden: !hints[0] }">Description: {{ pokemon.genera }}</p>
+		<p :class="{ hidden: !hints[2] }">First Letter: {{ pokemon.name.slice(0, 1) }}</p>
+		<input
+			type="text"
+			class="
+				rounded-md
+				bg-gray-600
+				mt-3
+				text-lg
+				mb-3
+				w-full
+				p-2
+				text-light-600
+				focus:(outline-none
+				ring ring-gray-300 ring-2)
+				"
+			v-model="name"
+			@keyup="InputKeyPress"
+		/>
+
+		<div class="grid gap-3 md:grid-cols-2">
+			<Button @click.once="submit">Submit</Button>
+			<Button class="border-none bg-orange-400 button-help !hover:bg-orange-600" @click="hint"
+				>Hint</Button
+			>
+		</div>
+	</main>
 </template>
 
 <script lang="ts" setup>
-import InputText from "primevue/inputtext";
-import Card from "primevue/card";
 import { getPokemon } from "../PokeApi";
 import { distance } from "fastest-levenshtein";
 import { reactive, ref } from "vue";

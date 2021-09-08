@@ -4,9 +4,9 @@
 	</div>
 	<div class="flex flex-col flex-1 place-items-center place-content-center">
 		<div class="center">
-			<Button class="p-button-2xl"><router-link to="/game">Start Game</router-link></Button>
+			<Button class="button-2xl"><router-link to="/game">Start Game</router-link></Button>
 			<br />
-			<Button class="p-button-xl mt-10">
+			<Button class="mt-10 button-xl">
 				<router-link to="/pokedex">PokeGuess Pokedex</router-link>
 			</Button>
 		</div>
