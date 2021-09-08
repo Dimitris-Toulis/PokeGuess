@@ -44,7 +44,7 @@
 <script lang="ts" setup>
 import { createStore, entries } from "idb-keyval";
 import { getPokemon, getPokemonCount, Pokemon } from "../PokeApi";
-import { Ref, ref } from "vue";
+import { onMounted, Ref, ref } from "vue";
 import { formatDistanceToNow } from "date-fns";
 let persisted = ref(navigator.storage?.persisted ? await navigator.storage.persisted() : false);
 
@@ -67,7 +67,7 @@ function handleClick(e: Event) {
 		pokemonDetailsVisible.value = false;
 	}
 }
-document.addEventListener("click", handleClick);
+onMounted(() => document.addEventListener("click", handleClick));
 function showDetails(pokemon: PokedexEntry, e: Event) {
 	e.stopImmediatePropagation();
 	currentPokemon.value = pokemon;
