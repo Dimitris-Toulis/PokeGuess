@@ -51,7 +51,7 @@ const updateSW = registerSW({
 onMounted(() => {
 	let prevClientHeight: number;
 	function handleResize() {
-		let clientHeight = document.documentElement.clientHeight;
+		let clientHeight = document.documentElement.clientHeight - 1;
 		if (clientHeight === prevClientHeight) return;
 		requestAnimationFrame(() => {
 			document.documentElement.style.setProperty("--vh", clientHeight * 0.01 + "px");
